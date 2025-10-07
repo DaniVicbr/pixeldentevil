@@ -1,0 +1,20 @@
+# Arquivos gerados pelo Godot (essencial para Godot 4+)
+.godot/
+.nomedia
+
+# Arquivos de exportação que podem conter informações sensíveis (opcional)
+export_presets.cfg
+export_credentials.cfg
+
+# Arquivos temporários e de crash (opcional, mas recomendado)
+*.tmp
+*.translation
+
+# Arquivos específicos do Mono/C# (se estiver usando C#)
+.mono/
+data_/
+mono_crash.*.json
+
+# Arquivos gerados por sistemas operacionais (opcional)
+.DS_Store
+Thumbs.db
