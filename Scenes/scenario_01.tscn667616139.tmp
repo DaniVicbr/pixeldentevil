@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=3 uid="uid://c0j0omjwd55rr"]
+
+[ext_resource type="Script" uid="uid://c5j8gjtoglqv1" path="res://Scripts/player.gd" id="1_73drf"]
+[ext_resource type="Texture2D" uid="uid://ck5es4u3e460a" path="res://Assets/Scenarios/scenario1.png" id="1_ubh18"]
+[ext_resource type="Texture2D" uid="uid://cy1jsjdyqsy1c" path="res://Assets/Character/PixeleonIdle.png" id="2_ubh18"]
+[ext_resource type="Texture2D" uid="uid://1jpby80u1ag5" path="res://Assets/Character/idle1.png" id="3_vlstl"]
+[ext_resource type="Texture2D" uid="uid://dabwmbyx0x0tm" path="res://Assets/Character/idle2.png" id="4_lwpwg"]
+[ext_resource type="Texture2D" uid="uid://cydb7y0p51ocu" path="res://Assets/Character/PixeleonRightFoot.png" id="4_tygcl"]
+[ext_resource type="Texture2D" uid="uid://bp1fs8e7qv56t" path="res://Assets/Character/PixeleonLeftFoot.png" id="5_g6243"]
+[ext_resource type="Texture2D" uid="uid://c36bnn44ueci8" path="res://Assets/Enemies/ZombieGreen/zombie1.png" id="8_2cbd2"]
+[ext_resource type="Script" uid="uid://dclqsqq7onhai" path="res://Scripts/zombie.gd" id="8_j72mr"]
+[ext_resource type="Texture2D" uid="uid://c0wmbpckh3wtg" path="res://Assets/Enemies/ZombieGreen/zombie2.png" id="9_j72mr"]
+[ext_resource type="Texture2D" uid="uid://bcho3b07gdl0j" path="res://Assets/Enemies/ZombieGreen/zombie3.png" id="10_egqt4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgi2y"]
+size = Vector2(59, 154)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vlstl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vlstl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lwpwg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ubh18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tygcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g6243")
+}],
+"loop": true,
+"name": &"run",
+"speed": 7.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bltq7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_2cbd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j72mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_egqt4")
+}],
+"loop": true,
+"name": &"run",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j72mr"]
+radius = 28.0
+height = 156.0
+
+[node name="Scenario01" type="Node2D"]
+
+[node name="Scenario1" type="Sprite2D" parent="."]
+position = Vector2(507, 417)
+texture = ExtResource("1_ubh18")
+
+[node name="Pixeleon" type="CharacterBody2D" parent="."]
+position = Vector2(84, 355)
+scale = Vector2(0.5, 0.5)
+up_direction = Vector2(1, 0)
+script = ExtResource("1_73drf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pixeleon"]
+position = Vector2(-40.5, 0)
+shape = SubResource("RectangleShape2D_hgi2y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pixeleon"]
+sprite_frames = SubResource("SpriteFrames_vlstl")
+animation = &"idle"
+frame_progress = 0.265006
+
+[node name="Zombie" type="CharacterBody2D" parent="." groups=["enemies"]]
+visible = false
+position = Vector2(1121, 356)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("8_j72mr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Zombie"]
+sprite_frames = SubResource("SpriteFrames_bltq7")
+animation = &"run"
+frame_progress = 0.0566706
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie"]
+position = Vector2(-22, 0)
+shape = SubResource("CapsuleShape2D_j72mr")
